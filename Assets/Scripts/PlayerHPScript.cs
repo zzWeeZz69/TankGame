@@ -10,7 +10,7 @@ public class PlayerHPScript : MonoBehaviour
 
     [Header("Health Components")]
     public int health;
-    public int maxHealth = 12;
+    public int maxHealth = 100;
 
 
     void Start()
@@ -18,9 +18,10 @@ public class PlayerHPScript : MonoBehaviour
         health = maxHealth;
     }
 
-    void Update()
+    private void Update()
     {
-            
+        if(health > maxHealth)
+        {
+            health = maxHealth;        }
     }
-
 }
