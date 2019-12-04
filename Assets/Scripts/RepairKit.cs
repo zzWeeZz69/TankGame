@@ -12,13 +12,9 @@ public class RepairKit : MonoBehaviour
         PlayerHealth = FindObjectOfType<PlayerHPScript>();
     }
 
-    void OnTriggerEnter(Collider collider)
-    {
-    }
-
     public void OnCollisionEnter(Collision collision)
     {
-        if (PlayerHealth.health < PlayerHealth.maxHealth)
+        if (PlayerHealth.health < PlayerHealth.maxHealth && collision.gameObject.tag == "Player")
         {
             PlayerHealth.health += Heal;
             Destroy(gameObject);
