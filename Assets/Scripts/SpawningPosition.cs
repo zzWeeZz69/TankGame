@@ -7,9 +7,12 @@ public class SpawningPosition : MonoBehaviour
     private float coolDown;
     public float coolDownTimer;
     public GameObject repairKit;
-    public float SpawBRange;
-    GameObject _clone;
+    GameObject[] RepairKits;
+    GameObject RepairKit;
+    public float spawnRange;
     bool hasObject;
+
+
 
     void Start()
     {
@@ -19,6 +22,29 @@ public class SpawningPosition : MonoBehaviour
 
     void Update()
     {
+        RepairKits = GameObject.FindGameObjectsWithTag("PickUp");
+        float Distance = float.MaxValue;
+        foreach (var pickup in RepairKits)
+        {
+            if (Distance > Vector3.Distance(transform.position, pickup.transform.position))
+            {
+                Distance = Vector3.Distance(transform.position, pickup.transform.position);
+                RepairKit = pickup;
+            }
+            else if(Distance < Vector3.Distance(transform.position, pickup.transform.position))
+            {
+                return;
+            }
+        }
+        if (GameObject.FindGameObjectWithTag("PickUp") == null)
+        {
+            hasObject = false;
+        }
+        else if (Vector3.Distance(transform.position, RepairKit.transform.position) > spawnRange)
+        {
+            hasObject = false;
+
+        }
 
         if (coolDown <= 0)
         {
@@ -26,7 +52,7 @@ public class SpawningPosition : MonoBehaviour
             coolDown = coolDownTimer;
             hasObject = true;
         }
-        //if (Vector3.Distance(transform.position))
+
         if (hasObject == false)
         {
             coolDown -= Time.deltaTime;
