@@ -20,8 +20,15 @@ public class PlayerHPScript : MonoBehaviour
 
     private void Update()
     {
+
         if(health > maxHealth)
         {
-            health = maxHealth;        }
+            health = maxHealth;
+        }
+
+        if(health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
