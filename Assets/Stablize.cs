@@ -15,7 +15,7 @@ public class Stablize : MonoBehaviour
     void Update()
     {
         Debug.Log(head.forward);
-        transform.rotation = Quaternion.LookRotation(.forward);
+        transform.rotation = Quaternion.LookRotation(transform.forward);
         Debug.DrawRay(transform.position, transform.forward, Color.green);
 
     }
