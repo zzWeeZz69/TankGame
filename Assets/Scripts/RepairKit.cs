@@ -5,7 +5,6 @@ using UnityEngine;
 public class RepairKit : MonoBehaviour
 {
     PlayerHPScript PlayerHealth;
-
     public int Heal = 10;
 
     void Awake()
@@ -13,7 +12,7 @@ public class RepairKit : MonoBehaviour
         PlayerHealth = FindObjectOfType<PlayerHPScript>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider collider)
     {
     }
 
