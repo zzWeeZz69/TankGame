@@ -5,10 +5,10 @@ using System.Diagnostics;
 
 public class SimpleCameraController : MonoBehaviour
 {
-    
+    GameObject[] players;
     private void Awake()
     {
-        
+        players = GameObject.FindGameObjectsWithTag("Player");
     }
 
     
