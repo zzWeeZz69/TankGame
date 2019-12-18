@@ -6,8 +6,12 @@ using UnityEngine;
 public class TankMovement : MonoBehaviour
 {
     #region vars
-    [SerializeField] float movement_speed;
-    [SerializeField] float turnSpeed;
+    public static TankMovement i
+    {
+        get; private set;
+    }
+    [SerializeField] public float movement_speed;
+    [SerializeField] public float turnSpeed;
     [SerializeField] Vector2 TurnLock;
 
     private Rigidbody rb;
@@ -16,6 +20,7 @@ public class TankMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        i = this;
     }
 
     // Update is called once per frame
@@ -33,7 +38,7 @@ public class TankMovement : MonoBehaviour
         }
         if (Input.GetButton("Jump"))
         {
-            Vector3 wantedPos = transform.position + (transform.forward * -movement_speed/2 * Time.deltaTime);
+            Vector3 wantedPos = transform.position + (transform.forward * -movement_speed / 2 * Time.deltaTime);
             rb.MovePosition(wantedPos);
         }
         transform.Rotate(new Vector3(0, turnSpeed * Input.GetAxis("Horizontal"), 0));
