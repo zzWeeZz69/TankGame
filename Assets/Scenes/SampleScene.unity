@@ -402,7 +402,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement_speed: 10
   turnSpeed: 5
-  ForceToqe: 5
+  TurnLock: {x: 0, y: 0}
 --- !u!1 &1282288635
 GameObject:
   m_ObjectHideFlags: 0
@@ -801,13 +801,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1941277091}
-  m_LocalRotation: {x: 0.14107138, y: 0.05368756, z: -0.8073521, w: 0.5704377}
-  m_LocalPosition: {x: -2.71, y: 1, z: 7.51}
-  m_LocalScale: {x: 2.2012832, y: 2.2012832, z: 2.2012832}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -19.98, y: 1, z: 7.51}
+  m_LocalScale: {x: 2.2012832, y: 0, z: 9.526713}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 14.338, y: -9.898001, z: -110.761}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!1 &2049586973
 GameObject:
   m_ObjectHideFlags: 0
