@@ -1,14 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShootScript : MonoBehaviour
 {
 
     Vector3 shootDirection;
 
+    public Image Arrowslider; 
+
     public GameObject bullet;
-    public GameObject arrow;
     //public GameObject bulletIndicator;
 
     public const float startBulletPower = 500f;
@@ -21,13 +23,15 @@ public class PlayerShootScript : MonoBehaviour
     {
         //    m_MyPosition.Set(m_NewTransform.position.x, m_NewTransform.position.y, 0);
         bulletPower = startBulletPower;
-        shootDirection.Set(0, 0.1f, 1);
+        Arrowslider.fillAmount = 0;
     }
 
     public void Update()
     {
         Fire();
         //FireIndicator();
+
+
     }
 
     private void Fire()
@@ -45,17 +49,19 @@ public class PlayerShootScript : MonoBehaviour
             chargeArrow = f;
             //chargeArrow = Mathf.Lerp(startBulletPower, maxBulletPower, f);
             Debug.Log("bulletPower" + bulletPower);
+            Arrowslider.fillAmount = bulletPower / maxBulletPower;
         }
 
         if (Input.GetKeyUp(KeyCode.P))
         {
             Debug.Log(bulletPower);
 
-            GameObject instBullet = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject;
+            GameObject instBullet = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject; //I have small pepe
             Rigidbody instBulletRigidbody = instBullet.GetComponent<Rigidbody>();
-            instBulletRigidbody.AddForce(shootDirection * bulletPower);
+            instBulletRigidbody.AddRelativeForce(transform.forward * bulletPower);
             bulletPower = startBulletPower;
             Debug.Log("Max bullet power " + maxBulletPower);
+            Arrowslider.fillAmount = 0;
         }
     }
 
