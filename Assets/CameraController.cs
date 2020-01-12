@@ -6,11 +6,13 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] float SmoothTime;
+    [SerializeField] float SmoothZoom;
     [SerializeField] List<Transform> Players;
     [SerializeField] float MinZoom, MaxZoom;
     [SerializeField] Transform CameraPivot;
 
     private Vector3 velocity;
+    private float Velocity;
     // Start is called before the first frame update
     void Awake()
     {
@@ -18,7 +20,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void LateUpdate()
+    void FixedUpdate()
     {
         Zoom();
         move();
@@ -29,7 +31,7 @@ public class CameraController : MonoBehaviour
         float distance = 0;
         if (Players.Count > 1)
             distance = Vector3.Distance(Players[0].position, Players[1].position);
-        Camera.main.orthographicSize = Mathf.Clamp(distance/2, MinZoom, MaxZoom)/1.5f;
+        Camera.main.orthographicSize = Mathf.SmoothDamp(Camera.main.orthographicSize, (Mathf.Clamp(distance/2, MinZoom, MaxZoom)/1.5f),  ref Velocity,SmoothZoom);
 
     }
 
