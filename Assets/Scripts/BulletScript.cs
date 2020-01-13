@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public int damage = 3;
+    public int damage = 20;
 
     //if(Input.GetButton())
 
