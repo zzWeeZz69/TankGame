@@ -1,44 +1,77 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerShootScript : MonoBehaviour
 {
-    public Rigidbody bullet;
-    public Rigidbody playerRigidBody;
 
-    public Vector3 offset;
+    Vector3 shootDirection;
 
-    public float bulletPower = 2;
-    public float valueToIncreaseEverySec = 100;
+    public Image Arrowslider; 
+
+    public GameObject bullet;
+    //public GameObject bulletIndicator;
+
+    public const float startBulletPower = 500f;
+    public const float maxBulletPower = 5000f;
+    private float bulletPower;
+    public float chargeArrow;
+    public float valueToIncreaseEverySec = 3f;
+
+    void Start()
+    {
+        //    m_MyPosition.Set(m_NewTransform.position.x, m_NewTransform.position.y, 0);
+        bulletPower = startBulletPower;
+        Arrowslider.fillAmount = 0;
+    }
 
     public void Update()
     {
-        StartCoroutine(ShootBullet());
+        Fire();
+        //FireIndicator();
+
+
     }
 
-    public IEnumerator ShootBullet()
+    private void Fire()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (bulletPower > maxBulletPower)
         {
-            Debug.Log("charging!");
-            bulletPower += valueToIncreaseEverySec * Time.deltaTime;
+            bulletPower = maxBulletPower;
         }
-        else if (Input.GetKeyUp(KeyCode.P))
+
+        if (Input.GetKey(KeyCode.P))
+        {
+
+            bulletPower += valueToIncreaseEverySec * Time.deltaTime;
+            float f = Mathf.InverseLerp(startBulletPower, maxBulletPower, bulletPower);
+            chargeArrow = f;
+            //chargeArrow = Mathf.Lerp(startBulletPower, maxBulletPower, f);
+            Debug.Log("bulletPower" + bulletPower);
+            Arrowslider.fillAmount = bulletPower / maxBulletPower;
+        }
+
+        if (Input.GetKeyUp(KeyCode.P))
         {
             Debug.Log(bulletPower);
 
-            Quaternion targetIns = Quaternion.Euler(transform.localRotation.x + offset.x, transform.rotation.y + offset.y, transform.position.z + offset.z);
-
-            playerRigidBody = Instantiate(bullet, transform.position, targetIns);
-
-
-            playerRigidBody.velocity = transform.TransformDirection(Vector3.forward * bulletPower);
-        }
-        else
-        {
-            yield return new WaitForSeconds(10);
-            bulletPower = 1;
+            GameObject instBullet = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject; //I have small pepe
+            Rigidbody instBulletRigidbody = instBullet.GetComponent<Rigidbody>();
+            instBulletRigidbody.AddRelativeForce(transform.forward * bulletPower);
+            bulletPower = startBulletPower;
+            Debug.Log("Max bullet power " + maxBulletPower);
+            Arrowslider.fillAmount = 0;
         }
     }
+
+    //private void FireIndicator()
+    //{
+    //    if (Input.GetKey(KeyCode.P))
+    //    {
+    //        GameObject instBulletIndicator = Instantiate(bulletIndicator, transform.position, Quaternion.identity) as GameObject;
+    //        Rigidbody instBulletRigidbodyIndicator = instBulletIndicator.GetComponent<Rigidbody>();
+    //        instBulletRigidbodyIndicator.AddForce(shootDirection * bulletPower);
+    //    }
+    //}
 }

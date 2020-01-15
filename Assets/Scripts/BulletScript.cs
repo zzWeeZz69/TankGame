@@ -4,27 +4,20 @@ using UnityEngine;
 
 public class BulletScript : MonoBehaviour
 {
-    public int damage = 3;
+    public int damage = 20;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        //if(Input.GetButton())
-    }
+    //if(Input.GetButton())
 
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             collision.transform.GetComponent<PlayerHPScript>().health -= damage;
-
             Destroy(gameObject);
-        }       
+        }
+        else if (collision.gameObject)
+        {
+            Destroy(gameObject);
+        }
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine;
 public class RepairKit : MonoBehaviour
 {
     PlayerHPScript PlayerHealth;
-
     public int Heal = 10;
 
     void Awake()
@@ -13,15 +12,16 @@ public class RepairKit : MonoBehaviour
         PlayerHealth = FindObjectOfType<PlayerHPScript>();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider collision)
     {
-    }
-
-    public void OnCollisionEnter(Collision collision)
-    {
-        if (PlayerHealth.health < PlayerHealth.maxHealth)
+        if (collision.gameObject.tag == "Player") //&& PlayerHealth.health < PlayerHealth.maxHealth)
         {
+            Debug.Log("911");
             PlayerHealth.health += Heal;
+            if(PlayerHealth.health > PlayerHealth.maxHealth)
+            {
+                PlayerHealth.health = PlayerHealth.maxHealth;
+            }
             Destroy(gameObject);
         }
     }
