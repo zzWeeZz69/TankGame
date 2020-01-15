@@ -15,12 +15,22 @@ public class TankMovement : MonoBehaviour
     [SerializeField] public float turnSpeed;
     [SerializeField] float MaxTilt;
 
+    private PlayerHPScript hp;
     private Rigidbody rb;
+    public GameObject SpeedBoost;
+
+    bool checkIsSb = false;
+    bool timeIsOver = false;
+    public float cooldown = 5;
+    public float currentTimer;
+    SpeedBoost sb = null;
+    RepairKit rk = null;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        hp = GetComponent<PlayerHPScript>();
         i = this;
     }
 
@@ -28,13 +38,53 @@ public class TankMovement : MonoBehaviour
     void Update()
     {
         MoveTank();
+        if (checkIsSb)
+        {
+
+            currentTimer -= Time.deltaTime;
+            if (currentTimer <= 0)
+            {
+                movement_speed -= sb.speedBoost;
+                checkIsSb = false;
+            }
+        }
     }
 
     private void MoveTank()
     {
         float Drive = Input.GetAxis("Drive_" + Player.ToString());
-            Vector3 wantedPos = transform.position + (transform.forward * (Drive * movement_speed) * Time.deltaTime);
-            rb.MovePosition(wantedPos);
+        Vector3 wantedPos = transform.position + (transform.forward * (Drive * movement_speed) * Time.deltaTime);
+        rb.MovePosition(wantedPos);
         transform.Rotate(new Vector3(0, turnSpeed * Input.GetAxis("Turn_" + Player.ToString()), 0));
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+
+        // om den detectar pickup
+        if (collision.gameObject.tag == "PickUp")
+        {
+
+            if (collision.gameObject.GetComponent<RepairKit>() != null)
+            {
+                rk = collision.gameObject.GetComponent<RepairKit>();
+                hp.health += rk.Heal;
+            }
+            if (collision.gameObject.GetComponent<SpeedBoost>() != null)
+            {
+                sb = collision.gameObject.GetComponent<SpeedBoost>();
+                movement_speed += sb.speedBoost;
+                currentTimer = cooldown;
+                checkIsSb = true;
+                if (timeIsOver)
+                {
+                    movement_speed -= sb.speedBoost;
+                }
+            }
+        }
+
+        // checka vilken pickup
+
+        // ge rätt buff
     }
 }
