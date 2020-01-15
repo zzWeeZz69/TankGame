@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5788638610572760978}
   - component: {fileID: 5788638610572760977}
   - component: {fileID: 5788638610572760976}
+  - component: {fileID: 3789734746092681275}
   m_Layer: 0
   m_Name: SpeedBoost
   m_TagString: PickUp
@@ -107,6 +108,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedBost: 10
+  duration: 5
+  currentDuration: 0
 --- !u!54 &5788638610572760976
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -123,3 +126,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3789734746092681275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5788638610572761007}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ad155a98fe4c48449f4316d93e94c3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PickUp: {fileID: 0}
+  Pickup: 1
