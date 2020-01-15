@@ -21,7 +21,7 @@ public class SpawningPosition : MonoBehaviour
 
     void Update()
     {
-        RepairKits = GameObject.FindGameObjectsWithTag("PickUp");
+        RepairKits = GameObject.FindGameObjectsWithTag("Pickup");
         float Distance = float.MaxValue;
         foreach (var pickup in RepairKits)
         {
