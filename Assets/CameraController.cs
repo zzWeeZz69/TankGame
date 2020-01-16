@@ -16,7 +16,7 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
-
+        Players.Add(GameObject.FindGameObjectWithTag("Player").transform);
     }
 
     // Update is called once per frame
