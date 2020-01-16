@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class PlayerHPScript : MonoBehaviour
 {
-
-    [Header("Inputs")]
-    public string player;
+    [HideInInspector]
+    public bool dead = false; 
 
     [Header("Health Components")]
     public int health;
@@ -15,6 +14,7 @@ public class PlayerHPScript : MonoBehaviour
     new Rigidbody rigidbody;
     public Vector3 position, velocity, angularVelocity;
     public bool isColliding;
+    public GameObject model;
 
     void Start()
     {
@@ -31,7 +31,12 @@ public class PlayerHPScript : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            dead = true;
+            model.SetActive(false);
+        }
+        else
+        {
+            model.SetActive(true);
         }
     }
 

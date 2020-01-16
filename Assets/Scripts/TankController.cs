@@ -11,11 +11,13 @@ public class TankController : MonoBehaviour
     {
         get; private set;
     }
+    public ActiveControls activeControls;
     [SerializeField] public float movement_speed;
     [SerializeField] public float turnSpeed;
     [SerializeField] float MaxTilt;
 
     private PlayerHPScript hp;
+    [SerializeField] PlayerShootScript ps;
     private Rigidbody rb;
     public GameObject SpeedBoost;
 
@@ -23,6 +25,7 @@ public class TankController : MonoBehaviour
     bool timeIsOver = false;
     public float cooldown = 5;
     public float currentTimer;
+    public bool Dead;
     SpeedBoost sb = null;
     RepairKit rk = null;
     #endregion
@@ -37,7 +40,21 @@ public class TankController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        MoveTank();
+        Dead = hp.dead;
+        switch (activeControls)
+        {
+            case ActiveControls.FullControllOn:
+                MoveTank();
+                ps.DisableShoot = false;
+                break;
+            case ActiveControls.MovementOff_ShootingOn:
+                ps.DisableShoot = false;
+                break;
+            case ActiveControls.FullControllOff:
+                ps.DisableShoot = true;
+                break;
+        }
+        
         if (checkIsSb)
         {
 
@@ -57,6 +74,8 @@ public class TankController : MonoBehaviour
         rb.MovePosition(wantedPos);
         transform.Rotate(new Vector3(0, turnSpeed * Input.GetAxis("Turn_" + Player.ToString()), 0));
     }
+
+
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -86,5 +105,12 @@ public class TankController : MonoBehaviour
         // checka vilken pickup
 
         // ge rätt buff
+    }
+
+    public enum ActiveControls
+    {
+        FullControllOn,
+        MovementOff_ShootingOn,
+        FullControllOff
     }
 }

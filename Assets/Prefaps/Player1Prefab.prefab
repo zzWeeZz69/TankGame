@@ -191,6 +191,7 @@ MonoBehaviour:
   tkControll: {fileID: 2788518580550795063}
   Arrowslider: {fileID: 5459786951912821519}
   bullet: {fileID: 1753974808634383609, guid: 17a908dd4acd89740bd6064ab46deefd, type: 3}
+  DisableShoot: 0
   chargeArrow: 0
   valueToIncreaseEverySec: 3000
 --- !u!1 &2087528211
@@ -415,12 +416,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: 1
+  activeControls: 0
   movement_speed: 10
   turnSpeed: 4
   MaxTilt: 0
+  ps: {fileID: 399424291}
   SpeedBoost: {fileID: 0}
   cooldown: 5
   currentTimer: 0
+  Dead: 0
 --- !u!65 &1315703104
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -446,13 +450,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6d18e11cd9e84d4cb4abfb00e31eaa5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: 
+  dead: 0
   health: 0
   maxHealth: 100
   position: {x: 0, y: 0, z: 0}
   velocity: {x: 0, y: 0, z: 0}
   angularVelocity: {x: 0, y: 0, z: 0}
   isColliding: 0
+  model: {fileID: 5963066089425013861}
 --- !u!1 &5459786951367566724
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,6 +772,12 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 083d1b9583c52534f91322487525313e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e3506e4bc4423474cbc529405e79fe9b, type: 3}
+--- !u!1 &5963066089425013861 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: e3506e4bc4423474cbc529405e79fe9b,
+    type: 3}
+  m_PrefabInstance: {fileID: 2441228168084084076}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7249186656443301494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -4216859302048453862, guid: e3506e4bc4423474cbc529405e79fe9b,

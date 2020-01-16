@@ -9,11 +9,12 @@ public class PlayerShootScript : MonoBehaviour
     Vector3 shootDirection;
 
     [SerializeField] TankController tkControll;
-    public Image Arrowslider; 
+    public Image Arrowslider;
 
     public GameObject bullet;
     //public GameObject bulletIndicator;
-
+    [HideInInspector]
+    public bool DisableShoot;
     public const float startBulletPower = 500f;
     public const float maxBulletPower = 5000f;
     private float bulletPower;
@@ -29,7 +30,8 @@ public class PlayerShootScript : MonoBehaviour
 
     public void Update()
     {
-        Fire();
+        if (!DisableShoot)
+            Fire();
         //FireIndicator();
 
 

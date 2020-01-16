@@ -25,7 +25,7 @@ public class CameraController : MonoBehaviour
     {
         for (int i = 0; i < Players.Count; i++)
         {
-            if (Players[i] == null)
+            if (Players[i].GetComponent<PlayerHPScript>().model.activeInHierarchy == false)
             {
                 Players.RemoveAt(i);
             }
