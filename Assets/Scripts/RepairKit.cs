@@ -14,14 +14,9 @@ public class RepairKit : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Player") //&& PlayerHealth.health < PlayerHealth.maxHealth)
+        if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("911");
-            PlayerHealth.health += Heal;
-            if(PlayerHealth.health > PlayerHealth.maxHealth)
-            {
-                PlayerHealth.health = PlayerHealth.maxHealth;
-            }
+            Debug.Log("N-word");
             Destroy(gameObject);
         }
     }
