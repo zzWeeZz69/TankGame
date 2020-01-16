@@ -3,11 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TankMovement : MonoBehaviour
+public class TankController : MonoBehaviour
 {
     #region vars
     public int Player;
-    public static TankMovement i
+    public static TankController i
     {
         get; private set;
     }

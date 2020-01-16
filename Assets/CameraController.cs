@@ -17,13 +17,22 @@ public class CameraController : MonoBehaviour
     void Awake()
     {
         Players.Add(GameObject.FindGameObjectWithTag("Player").transform);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        for (int i = 0; i < Players.Count; i++)
+        {
+            if (Players[i] == null)
+            {
+                Players.RemoveAt(i);
+            }
+        }
         Zoom();
         move();
+        
     }
 
     private void Zoom()

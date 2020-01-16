@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SpeedBoost : MonoBehaviour
 {
-    TankMovement movement_speed;
+    TankController movement_speed;
     public float speedBoost = 10;
     private void OnTriggerEnter(Collider collision)
     {

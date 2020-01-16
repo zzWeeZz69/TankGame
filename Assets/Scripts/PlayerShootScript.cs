@@ -8,6 +8,7 @@ public class PlayerShootScript : MonoBehaviour
 
     Vector3 shootDirection;
 
+    [SerializeField] TankController tkControll;
     public Image Arrowslider; 
 
     public GameObject bullet;
@@ -41,7 +42,7 @@ public class PlayerShootScript : MonoBehaviour
             bulletPower = maxBulletPower;
         }
 
-        if (Input.GetKey(KeyCode.P))
+        if (Input.GetButton("Shoot_" + tkControll.Player.ToString()))
         {
 
             bulletPower += valueToIncreaseEverySec * Time.deltaTime;
@@ -52,7 +53,7 @@ public class PlayerShootScript : MonoBehaviour
             Arrowslider.fillAmount = bulletPower / maxBulletPower;
         }
 
-        if (Input.GetKeyUp(KeyCode.P))
+        if (Input.GetButtonUp("Shoot_" + tkControll.Player.ToString()))
         {
             Debug.Log(bulletPower);
 
