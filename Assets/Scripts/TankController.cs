@@ -70,6 +70,7 @@ public class TankController : MonoBehaviour
     private void MoveTank()
     {
         float Drive = Input.GetAxis("Drive_" + Player.ToString());
+        Debug.Log(Drive + Player.ToString());
         Vector3 wantedPos = transform.position + (transform.forward * (Drive * movement_speed) * Time.deltaTime);
         rb.MovePosition(wantedPos);
         transform.Rotate(new Vector3(0, turnSpeed * Input.GetAxis("Turn_" + Player.ToString()), 0));

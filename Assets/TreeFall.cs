@@ -12,13 +12,13 @@ public class TreeFall : MonoBehaviour
     }
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -27,11 +27,12 @@ public class TreeFall : MonoBehaviour
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.tag == "Player")
+        if (collision.collider.tag == "Player")
         {
             Transform Dir = collision.gameObject.transform;
-            rb.AddRelativeForce(Dir.forward * 400);
+            rb.AddRelativeForce(Dir.forward * 20, ForceMode.Impulse);
+            Destroy(gameObject, 1);
         }
-        
+
     }
 }
