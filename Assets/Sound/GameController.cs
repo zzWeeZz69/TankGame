@@ -5,7 +5,7 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    public TankController Pyr1, Pyr2;
+    public TankController Player1, Player2;
     public static GameController i;
     [Header("Win vars")]
     public Winner winner;
@@ -52,12 +52,12 @@ public class GameController : MonoBehaviour
     {
         if (LockEnum == false)
         {
-            if (Pyr1.Dead == true)
+            if (Player1.Dead == true)
             {
                 winner = Winner.Player2;
                 LockEnum = true;
             }
-            if (Pyr2.Dead == true)
+            if (Player2.Dead == true)
             {
                 winner = Winner.Player1;
                 LockEnum = true;
@@ -69,7 +69,7 @@ public class GameController : MonoBehaviour
             {
                 case Winner.Player1:
                     WinText.color = Color.green;
-                    Pyr1.activeControls = TankController.ActiveControls.FullControllOff;
+                    Player1.activeControls = TankController.ActiveControls.FullControllOff;
                     //source.Play();
                     WinText.text = "Winner is Green!";
                     anim.SetTrigger("Win");
@@ -78,7 +78,7 @@ public class GameController : MonoBehaviour
                 case Winner.Player2:
                     //source.Play();
                     WinText.color = Color.red;
-                    Pyr2.activeControls = TankController.ActiveControls.FullControllOff;
+                    Player2.activeControls = TankController.ActiveControls.FullControllOff;
                     WinText.text = "Winner is Red!";
                     anim.SetTrigger("Win");
                     Time.timeScale = 0;

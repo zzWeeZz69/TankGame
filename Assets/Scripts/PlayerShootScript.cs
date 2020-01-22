@@ -49,6 +49,7 @@ public class PlayerShootScript : MonoBehaviour
 
             bulletPower += valueToIncreaseEverySec * Time.deltaTime;
             float f = Mathf.InverseLerp(startBulletPower, maxBulletPower, bulletPower);
+            
             chargeArrow = f;
             //chargeArrow = Mathf.Lerp(startBulletPower, maxBulletPower, f);
             Debug.Log("bulletPower" + bulletPower);
