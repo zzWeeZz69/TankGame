@@ -14,6 +14,8 @@ public class TankController : MonoBehaviour
     public ActiveControls activeControls;
     [SerializeField] public float movement_speed;
     [SerializeField] public float turnSpeed;
+    [SerializeField] public GameObject MinePrefab;
+    [SerializeField] public Transform MineDropPoint;
     [SerializeField] float MaxTilt;
 
     private PlayerHPScript hp;
@@ -44,17 +46,19 @@ public class TankController : MonoBehaviour
         switch (activeControls)
         {
             case ActiveControls.FullControllOn:
+                DropMine(MinePrefab, MineDropPoint);
                 MoveTank();
                 ps.DisableShoot = false;
                 break;
-            case ActiveControls.MovementOff_ShootingOn:
+            case ActiveControls.MovementOff_WeponsOn:
+                DropMine(MinePrefab, MineDropPoint);
                 ps.DisableShoot = false;
                 break;
             case ActiveControls.FullControllOff:
                 ps.DisableShoot = true;
                 break;
         }
-        
+
         if (checkIsSb)
         {
 
@@ -65,6 +69,19 @@ public class TankController : MonoBehaviour
                 checkIsSb = false;
             }
         }
+    }
+
+    private void DropMine(GameObject Mine, Transform dropPoint)
+    {
+        Debug.Log(Mine, dropPoint);
+        if (Input.GetButtonDown("DropMine_" + Player.ToString()))
+        {
+            Debug.Log("buttonPressed");
+            var mine = Instantiate(Mine, dropPoint.position, Quaternion.identity);
+            Debug.Log("MineSpawned");
+            mine.GetComponent<Mine>().whoOwnes = Player;
+        }
+
     }
 
     private void MoveTank()
@@ -110,7 +127,7 @@ public class TankController : MonoBehaviour
     public enum ActiveControls
     {
         FullControllOn,
-        MovementOff_ShootingOn,
+        MovementOff_WeponsOn,
         FullControllOff
     }
 }
