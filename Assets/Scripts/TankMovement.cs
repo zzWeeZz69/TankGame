@@ -10,9 +10,14 @@ public class TankMovement : MonoBehaviour
     [SerializeField] float turnSpeed;
     [SerializeField] Vector2 TurnLock;
 
+    [SerializeField] ParticleSystem smokeParticle;
+    [SerializeField] ParticleSystem dustParticle;
+
     private Rigidbody rb;
     #endregion
     // Start is called before the first frame update
+
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -30,6 +35,13 @@ public class TankMovement : MonoBehaviour
         {
             Vector3 wantedPos = transform.position + (transform.forward * movement_speed * Time.deltaTime);
             rb.MovePosition(wantedPos);
+            smokeParticle.Play();
+            dustParticle.Play();
+        }
+        else
+        {
+            smokeParticle.Stop();
+            dustParticle.Stop();
         }
         if (Input.GetButton("Jump"))
         {
