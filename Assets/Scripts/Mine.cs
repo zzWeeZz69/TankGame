@@ -14,7 +14,7 @@ public class Mine : MonoBehaviour
     {
         readyIn = cooldown;
         readyIn -= Time.deltaTime;
-       
+
     }
     private void OnTriggerEnter(Collider Collision)
     {
@@ -22,6 +22,7 @@ public class Mine : MonoBehaviour
         {
             PlayerHealth = Collision.GetComponent<PlayerHPScript>();
             PlayerHealth.health -= damge;
+
             Destroy(gameObject);
         }
     }
