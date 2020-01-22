@@ -15,16 +15,9 @@ public class ExplodingBullet : MonoBehaviour
     public float upwardThrust = 3f;
     public GameObject explosion;
     private Collider[] overlappers;
-    // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void FixedUpdate()
@@ -38,7 +31,7 @@ public class ExplodingBullet : MonoBehaviour
         {
             Collider[] colliders = GetOverlappers();
 
-            foreach(Collider hit in colliders)
+            foreach (Collider hit in colliders)
             {
                 Rigidbody rb = hit.GetComponent<Rigidbody>();
                 if (rb != null)

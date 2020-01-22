@@ -16,7 +16,6 @@ public class RepairKit : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("N-word");
             Destroy(gameObject);
         }
     }
