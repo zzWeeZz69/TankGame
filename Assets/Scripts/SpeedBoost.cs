@@ -10,7 +10,6 @@ public class SpeedBoost : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            Debug.Log("Im SPEED");
             Destroy(gameObject);
         }
     }

@@ -7,7 +7,7 @@ public class OnMouseHover : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Application.q
+        //Application.q
     }
 
     public void OnMouseEnter()
