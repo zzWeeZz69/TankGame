@@ -80,6 +80,10 @@ public class TankController : MonoBehaviour
             var mine = Instantiate(Mine, dropPoint.position, Quaternion.identity);
             Debug.Log("MineSpawned");
             mine.GetComponent<Mine>().whoOwnes = Player;
+            switch (Player)
+            {
+                
+            }
         }
 
     }

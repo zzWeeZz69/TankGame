@@ -9,12 +9,23 @@ public class Mine : MonoBehaviour
     public int damge = 20;
     public float cooldown = 3f;
     public float readyIn;
-
+    public Material mr;
     void Awake()
     {
         readyIn = cooldown;
         readyIn -= Time.deltaTime;
        
+    }
+    private void Update()
+    {
+        if(whoOwnes == 1)
+        {
+            mr.color = Color.green;
+        }
+        else
+        {
+            mr.color = Color.red;
+        }
     }
     private void OnTriggerEnter(Collider Collision)
     {
