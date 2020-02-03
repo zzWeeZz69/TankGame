@@ -2154,7 +2154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61b39e4abf201794281cb5596abfdacf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1: {fileID: 0}
+  Player1: {fileID: 5560959726917283201}
   Player2: {fileID: 6575160869182009218}
   winner: 2
   WinText: {fileID: 1246656401}
@@ -4461,6 +4461,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bc0d4272dead88043995ecdd8ac9cc72, type: 3}
+--- !u!114 &5560959726917283201 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7839785624550704750, guid: bc0d4272dead88043995ecdd8ac9cc72,
+    type: 3}
+  m_PrefabInstance: {fileID: 5560959726917283200}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d617a6da90e156443a54d0f6e2ff585b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &6575160869182009218 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1295016944268979298, guid: 2e8f52ccc96837642b65abd4028890ef,
