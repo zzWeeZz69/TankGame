@@ -12,6 +12,7 @@ public class TankController : MonoBehaviour
         get; private set;
     }
     public ActiveControls activeControls;
+
     [SerializeField] public float movement_speed;
     [SerializeField] public float turnSpeed;
     [SerializeField] public GameObject MinePrefab;
@@ -42,16 +43,17 @@ public class TankController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         Dead = hp.dead;
         switch (activeControls)
         {
             case ActiveControls.FullControllOn:
-                DropMine(MinePrefab, MineDropPoint);
+                StartCoroutine(DropMine(MinePrefab, MineDropPoint, 0.5f));
                 MoveTank();
                 ps.DisableShoot = false;
                 break;
             case ActiveControls.MovementOff_WeponsOn:
-                DropMine(MinePrefab, MineDropPoint);
+                StartCoroutine( DropMine(MinePrefab, MineDropPoint, 0.5f));
                 ps.DisableShoot = false;
                 break;
             case ActiveControls.FullControllOff:
@@ -71,19 +73,26 @@ public class TankController : MonoBehaviour
         }
     }
 
-    private void DropMine(GameObject Mine, Transform dropPoint)
+    private IEnumerator DropMine(GameObject Mine, Transform dropPoint, float reloadTimer)
     {
         Debug.Log(Mine, dropPoint);
+        yield return new WaitForSeconds(reloadTimer);
         if (Input.GetButtonDown("DropMine_" + Player.ToString()))
         {
             Debug.Log("buttonPressed");
             var mine = Instantiate(Mine, dropPoint.position, Quaternion.identity);
             Debug.Log("MineSpawned");
-            mine.GetComponent<Mine>().whoOwnes = Player;
+            
             switch (Player)
             {
-                
+                case 1:
+                    mine.GetComponent<Mine>().whoOwnes = 1;
+                    break;
+                case 2:
+                    mine.GetComponent<Mine>().whoOwnes = 2;
+                    break;
             }
+            
         }
 
     }
@@ -129,10 +138,12 @@ public class TankController : MonoBehaviour
         // ge rätt buff
     }
 
+    
     public enum ActiveControls
     {
         FullControllOn,
         MovementOff_WeponsOn,
         FullControllOff
     }
+
 }

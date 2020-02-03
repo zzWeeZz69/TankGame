@@ -10,10 +10,11 @@ public class Mine : MonoBehaviour
     public float cooldown = 3f;
     public float readyIn;
     public Material mr;
+
+    
     void Awake()
     {
         readyIn = cooldown;
-        readyIn -= Time.deltaTime;
        
     }
     private void Update()
@@ -29,11 +30,18 @@ public class Mine : MonoBehaviour
     }
     private void OnTriggerEnter(Collider Collision)
     {
-        if (Collision.gameObject.tag == "Player" && readyIn <= 0 && Collision.gameObject.GetComponent<TankController>().Player != whoOwnes)
+        if (Collision.gameObject.tag == "Player" && Collision.gameObject.GetComponent<TankController>().Player != whoOwnes)
         {
             PlayerHealth = Collision.GetComponent<PlayerHPScript>();
-            PlayerHealth.health -= damge;
-            Destroy(gameObject);
+            
+            StartCoroutine(DestroyMine(0.5f, gameObject));
         }
+    }
+
+    public IEnumerator DestroyMine(float Time, GameObject Mine)
+    {
+        yield return new WaitForSeconds(Time);
+        PlayerHealth.health -= damge;
+        Destroy(Mine);
     }
 }
