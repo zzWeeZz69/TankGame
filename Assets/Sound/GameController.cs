@@ -92,4 +92,17 @@ public class GameController : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
+
+
+    public static bool WaitforSecs(float seconds)
+    {
+        float cooldown = seconds;
+        cooldown -= Time.deltaTime;
+        if (cooldown > 0)
+        {
+            return false;
+        }
+        else
+            return true;
+    }
 }
