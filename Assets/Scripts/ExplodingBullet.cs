@@ -15,9 +15,11 @@ public class ExplodingBullet : MonoBehaviour
     public float upwardThrust = 3f;
     public GameObject explosion;
     private Collider[] overlappers;
+    AudioSource explosionSound;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        explosionSound = GameObject.Find("ExplosionSoundObject").GetComponent<AudioSource>();
     }
 
     void FixedUpdate()
@@ -30,6 +32,8 @@ public class ExplodingBullet : MonoBehaviour
         if (shouldExplode)
         {
             Collider[] colliders = GetOverlappers();
+
+            explosionSound.Play();
 
             foreach (Collider hit in colliders)
             {

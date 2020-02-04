@@ -8,6 +8,8 @@ public class PlayerShootScript : MonoBehaviour
 
     Vector3 shootDirection;
 
+    public AudioSource ShootSound;
+
     [SerializeField] TankController tkControll;
     public Image Arrowslider;
 
@@ -24,6 +26,7 @@ public class PlayerShootScript : MonoBehaviour
     void Start()
     {
         //    m_MyPosition.Set(m_NewTransform.position.x, m_NewTransform.position.y, 0);
+        ShootSound = GameObject.Find("ShootSoundObject").GetComponent<AudioSource>();
         bulletPower = startBulletPower;
         Arrowslider.fillAmount = 0;
     }
@@ -59,7 +62,7 @@ public class PlayerShootScript : MonoBehaviour
         if (Input.GetButtonUp("Shoot_" + tkControll.Player.ToString()))
         {
             Debug.Log(bulletPower);
-
+            ShootSound.Play();
             GameObject instBullet = Instantiate(bullet, transform.position, Quaternion.identity) as GameObject; //I have small pepe
             Rigidbody instBulletRigidbody = instBullet.GetComponent<Rigidbody>();
             instBulletRigidbody.AddRelativeForce(transform.forward * bulletPower);
