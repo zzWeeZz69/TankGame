@@ -75,11 +75,15 @@ public class GameController : MonoBehaviour
                     //source.Play();
                     WinText.text = "Winner is Green!";
                     anim.SetTrigger("Win");
+                    if (Input.GetKeyDown(KeyCode.JoystickButton0))
+                        LoadMain();
                     Time.timeScale = 0;
                     break;
                 case Winner.Player2:
                     //source.Play();
                     WinText.color = Color.red;
+                    if (Input.GetKeyDown(KeyCode.JoystickButton0))
+                        LoadMain();
                     Player2.activeControls = TankController.ActiveControls.FullControllOff;
                     WinText.text = "Winner is Red!";
                     anim.SetTrigger("Win");
@@ -92,6 +96,19 @@ public class GameController : MonoBehaviour
     }
     public void LoadMain()
     {
-        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+        UnityEngine.SceneManagement.SceneManager.LoadScene(1);
+    }
+
+
+    public static bool WaitforSecs(float seconds)
+    {
+        float cooldown = seconds;
+        cooldown -= Time.deltaTime;
+        if (cooldown > 0)
+        {
+            return false;
+        }
+        else
+            return true;
     }
 }

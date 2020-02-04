@@ -25,6 +25,7 @@ public class TankController : MonoBehaviour
     private Rigidbody rb;
     public GameObject SpeedBoost;
 
+    public bool stun;
     bool checkIsSb = false;
     bool timeIsOver = false;
     public float cooldown = 5;
@@ -32,6 +33,8 @@ public class TankController : MonoBehaviour
     public bool Dead;
     SpeedBoost sb = null;
     RepairKit rk = null;
+    Animator anim;
+    float MineCoolDown = 1.5f;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -40,23 +43,23 @@ public class TankController : MonoBehaviour
         EngineSound.Play();
         rb = GetComponent<Rigidbody>();
         hp = GetComponent<PlayerHPScript>();
+        anim = GetComponent<Animator>();
         i = this;
     }
 
     // Update is called once per frame
     void Update()
     {
-
         Dead = hp.dead;
         switch (activeControls)
         {
             case ActiveControls.FullControllOn:
-                StartCoroutine(DropMine(MinePrefab, MineDropPoint, 0.5f));
+                DropMine(MinePrefab, MineDropPoint);
                 MoveTank();
                 ps.DisableShoot = false;
                 break;
             case ActiveControls.MovementOff_WeponsOn:
-                StartCoroutine( DropMine(MinePrefab, MineDropPoint, 0.5f));
+                DropMine(MinePrefab, MineDropPoint);
                 ps.DisableShoot = false;
                 break;
             case ActiveControls.FullControllOff:
@@ -74,14 +77,22 @@ public class TankController : MonoBehaviour
                 checkIsSb = false;
             }
         }
-    }
-
-    private IEnumerator DropMine(GameObject Mine, Transform dropPoint, float reloadTimer)
-    {
-        Debug.Log(Mine, dropPoint);
-        yield return new WaitForSeconds(reloadTimer);
-        if (Input.GetButtonDown("DropMine_" + Player.ToString()))
+        if (stun)
         {
+            StartCoroutine(stunTank(0.5f));
+        }
+    }
+    float time;
+    private void DropMine(GameObject Mine, Transform dropPoint)
+    {
+        if(time > 0)
+        {
+            time -= Time.deltaTime;
+        }
+        Debug.Log(Mine, dropPoint);
+        if (Input.GetButtonDown("DropMine_" + Player.ToString()) && time <= 0)
+        {
+            time = MineCoolDown;
             Debug.Log("buttonPressed");
             var mine = Instantiate(Mine, dropPoint.position, Quaternion.identity);
             Debug.Log("MineSpawned");
@@ -141,7 +152,15 @@ public class TankController : MonoBehaviour
         // ge rätt buff
     }
 
-    
+    public IEnumerator stunTank(float time)
+    {
+        activeControls = ActiveControls.FullControllOff;
+        anim.SetBool("Stun", true);
+        yield return new WaitForSeconds(time);
+        stun = false;
+        anim.SetBool("Stun", false);
+        activeControls = ActiveControls.FullControllOn;
+    }
     public enum ActiveControls
     {
         FullControllOn,

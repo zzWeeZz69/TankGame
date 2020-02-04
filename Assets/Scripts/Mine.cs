@@ -11,7 +11,7 @@ public class Mine : MonoBehaviour
     public float readyIn;
     public Material mr;
 
-    
+    TankController controller;
     void Awake()
     {
         readyIn = cooldown;
@@ -33,7 +33,7 @@ public class Mine : MonoBehaviour
         if (Collision.gameObject.tag == "Player" && Collision.gameObject.GetComponent<TankController>().Player != whoOwnes)
         {
             PlayerHealth = Collision.GetComponent<PlayerHPScript>();
-            
+            controller = Collision.GetComponent<TankController>();   
             StartCoroutine(DestroyMine(0.5f, gameObject));
         }
     }
@@ -41,6 +41,7 @@ public class Mine : MonoBehaviour
     public IEnumerator DestroyMine(float Time, GameObject Mine)
     {
         yield return new WaitForSeconds(Time);
+        controller.stun = true;
         PlayerHealth.health -= damge;
         Destroy(Mine);
     }
