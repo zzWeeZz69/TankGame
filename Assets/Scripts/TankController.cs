@@ -18,6 +18,7 @@ public class TankController : MonoBehaviour
     [SerializeField] public GameObject MinePrefab;
     [SerializeField] public Transform MineDropPoint;
     [SerializeField] float MaxTilt;
+    AudioSource EngineSound;
 
     private PlayerHPScript hp;
     [SerializeField] PlayerShootScript ps;
@@ -35,6 +36,8 @@ public class TankController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        EngineSound = GameObject.Find("EngineSoundObject").GetComponent<AudioSource>();
+        EngineSound.Play();
         rb = GetComponent<Rigidbody>();
         hp = GetComponent<PlayerHPScript>();
         i = this;

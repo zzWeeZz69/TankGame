@@ -45,7 +45,9 @@ public class GameController : MonoBehaviour
             Application.Quit();
             
             Debug.Log("Quit");
+
         }
+        
     }
 
     public void ChooseWinner()
